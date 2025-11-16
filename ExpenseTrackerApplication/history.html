@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>History</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<button class="themeToggle" onclick="toggleTheme()">Toggle Theme</button>
+
+<div class="nav">
+    <a href="index.html">➕ Add</a>
+    <a href="history.html">📜 History</a>
+    <a href="budget.html">💰 Budget</a>
+    <a href="compare.html">📊 Compare</a>
+</div>
+
+
+<div class="container">
+    <h1>Expense History</h1>
+
+    <p><b>This Month Total:</b> <span id="total"></span></p>
+
+    <div id="list"></div>
+</div>
+
+<script src="app.js"></script>
+<script>
+function loadList() {
+    document.getElementById("total").innerText = "₹" + getMonthlyTotal();
+
+    let list = document.getElementById("list");
+    list.innerHTML = "";
+
+    expenses.forEach(e => {
+        let row = document.createElement("div");
+        row.style.marginBottom = "10px";
+        row.innerHTML = `
+            <div class="expense-card">
+    <h3>₹${e.amount}</h3>
+    <p>${e.category}</p>
+    <p><small>${e.date}</small></p>
+
+    <button onclick="startEdit(${e.id})">Edit</button>
+    <button onclick="remove(${e.id})">Delete</button>
+</div>
+
+            <button onclick="startEdit(${e.id})">Edit</button>
+            <button onclick="remove(${e.id})">Delete</button>
+            <hr>
+        `;
+        list.appendChild(row);
+    });
+}
+
+function startEdit(id) {
+    const e = expenses.find(x => x.id === id);
+
+    const newAmount = prompt("Enter new amount", e.amount);
+    const newCategory = prompt("Enter new category", e.category);
+    const newDate = prompt("Enter new date (YYYY-MM-DD)", e.date);
+
+    if (newAmount && newCategory && newDate) {
+        editExpense(id, newAmount, newCategory, newDate);
+        loadList();
+    }
+}
+
+function remove(id) {
+    if (confirm("Delete this expense?")) {
+        deleteExpense(id);
+        loadList();
+    }
+}
+
+window.onload = loadList;
+</script>
+
+
+</body>
+</html>

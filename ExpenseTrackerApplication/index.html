@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Expense</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<button class="themeToggle" onclick="toggleTheme()">Toggle Theme</button>
+
+<div class="nav">
+    <a href="index.html">➕ Add</a>
+    <a href="history.html">📜 History</a>
+    <a href="budget.html">💰 Budget</a>
+    <a href="compare.html">📊 Compare</a>
+</div>
+
+
+<div class="container">
+    <h1>Add Expense</h1>
+
+    <input type="number" id="amount" placeholder="Amount">
+    <input type="text" id="category" placeholder="Category">
+    <input type="date" id="date">
+
+    <button onclick="add()">Save Expense</button>
+</div>
+
+<script src="app.js"></script>
+<script>
+function add() {
+    const amount = document.getElementById("amount").value;
+    const category = document.getElementById("category").value;
+    const date = document.getElementById("date").value;
+
+    if (!amount || !category || !date) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    saveExpense(amount, category, date);
+    alert("Expense added successfully!");
+}
+</script>
+
+</body>
+</html>

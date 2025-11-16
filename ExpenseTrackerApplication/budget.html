@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <button class="themeToggle" onclick="toggleTheme()">Toggle Theme</button>
+
+<div class="nav">
+    <a href="index.html">➕ Add</a>
+    <a href="history.html">📜 History</a>
+    <a href="budget.html">💰 Budget</a>
+    <a href="compare.html">📊 Compare</a>
+</div>
+
+
+<div class="container">
+    <h1>Monthly Budget</h1>
+
+    <input type="number" id="budgetAmount" placeholder="Enter Budget">
+    <button onclick="save()">Save Budget</button>
+
+    <h3>Current Budget: <span id="currentBudget"></span></h3>
+    <h3>Remaining: <span id="remaining"></span></h3>
+</div>
+
+<script src="app.js"></script>
+<script>
+function save() {
+    const amount = document.getElementById("budgetAmount").value;
+    if (!amount) return alert("Enter a valid budget");
+
+    saveBudget(amount);
+    load();
+}
+
+function load() {
+    document.getElementById("currentBudget").innerText = "₹" + budget.amount;
+    document.getElementById("remaining").innerText = "₹" + (budget.amount - getMonthlyTotal());
+}
+
+window.onload = load;
+</script>
+
+</body>
+</html>

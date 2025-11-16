@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compare Months</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+<button class="themeToggle" onclick="toggleTheme()">Toggle Theme</button>
+
+<div class="nav">
+    <a href="index.html">➕ Add</a>
+    <a href="history.html">📜 History</a>
+    <a href="budget.html">💰 Budget</a>
+    <a href="compare.html">📊 Compare</a>
+</div>
+
+
+<div class="container">
+    <h1>Compare Monthly Spending</h1>
+    <div id="compare"></div>
+</div>
+
+<script src="app.js"></script>
+<script>
+window.onload = function() {
+
+    const data = getMonthComparison();
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+    const ctx = document.createElement("canvas");
+    document.getElementById("compare").appendChild(ctx);
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: months,
+            datasets: [{
+                label: "Monthly Expenses",
+                data: data
+            }]
+        }
+    });
+};
+</script>
+
+
+</body>
+</html>
